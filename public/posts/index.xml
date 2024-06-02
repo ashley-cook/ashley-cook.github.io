@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Ashley&#39;s Project Blog</title>
+    <link>http://localhost:1313/posts/</link>
+    <description>Recent content in Posts on Ashley&#39;s Project Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <managingEditor>user@example.com (Hugo Author)</managingEditor>
+    <webMaster>user@example.com (Hugo Author)</webMaster>
+    <copyright>Ashley Cook</copyright>
+    <lastBuildDate>Thu, 30 May 2024 15:05:56 -0700</lastBuildDate>
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dear ImGui with .NET in Unity</title>
+      <link>http://localhost:1313/posts/imgui-in-unity/</link>
+      <pubDate>Thu, 30 May 2024 15:05:56 -0700</pubDate><author>user@example.com (Hugo Author)</author>
+      <guid>http://localhost:1313/posts/imgui-in-unity/</guid>
+      <description>Here&amp;rsquo;s how I was able to get ImGui&#xD;working inside the Unity game engine from a .NET mod loaded with BepInEx&#xD;.&#xA;ImGuiRenderingPlugin&#xD;performs the heavy lifting of hooking the relevant graphics interface and acts as an ImGui backend. ImGui.NET&#xD;is used as a wrapper around the native front-end provided by cimgui&#xD;.&#xA;Dependency Setup With BepInEx already installed, I built the example project and set up a post-build task to copy it to &amp;lt;Game&amp;gt;/BepInEx/plugins/ImGuiMod/Mod.</description>
+    </item>
+  </channel>
+</rss>
