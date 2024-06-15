@@ -30,7 +30,7 @@ I've opted to use an existing modding framework called [BepInEx](https://github.
 DLL hijacking to perform the necessary redirections, which is important as it means we'll almost never need to
 update the mod or re-patch existing files after a game update. It also provides a 
 [custom patching library](https://github.com/BepInEx/HarmonyX), which will allow me to easily patch the network
-management code. I'll also be working from the GUI system referenced in my [previous post](posts/imgui-in-unity/).
+management code. I'll also be working from the GUI system referenced in my [previous post](/posts/imgui-in-unity/).
 
 ## Network Overview
 The networking layer is directed through a small class `TOSNetworkService`. This class is responsible for managing
