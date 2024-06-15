@@ -197,7 +197,7 @@ private static void StopRecording()
     IsRecording = false;
 }
 
-private static void StartRecording(String filePath)
+public static void StartPlayback(String filePath)
 {
     Recording recording = Newtonsoft.Json.JsonConvert.DeserializeObject<Recording>(File.ReadAllText(filePath));
     
