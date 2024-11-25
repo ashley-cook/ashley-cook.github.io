@@ -1,0 +1,48 @@
+{{/* code from https://www.brycewray.com/posts/2023/05/better-code-image-processing-hugo-render-hook-edition/ */}}
+{{- $respSizes := slice "320" "640" "960" "1280" "1600" "1920" -}}
+{{- $src := .Page.Resources.GetMatch (.Destination) -}}
+{{- $alt := .Text -}}
+{{- $caption := .Title -}}
+{{- if (not $caption) -}}
+{{- $caption = $alt | safeHTML -}}
+{{- end -}}
+{{- $holder := "GIP" -}}
+{{- $hint := "photo" -}}
+{{- $filter := "box" -}}
+{{/*
+	The `$holder` variable (placeholder) assumes the
+	use of the `head-imgs-css.html` partial
+	template (or similar code); so edit
+	as may be appropriate for your own site.
+	As for the `$hint` and `$filter` items from
+	the shortcode, we have no way to `get` them
+	from the Markdown syntax's attributes so,
+	instead, we set their default values.
+*/}}
+{{- $imgBd5 := md5 $src -}}
+{{- $divClass := print "relative flex justify-center bg-center imgB-" $imgBd5 "-" $holder -}}
+{{- $imgClass := "" -}}
+{{- $dataSzes := "(min-width: 1024px) 100vw, 50vw" -}}
+{{- $actualImg := $src.Resize (print "640x jpg " $filter) -}}
+<div class="{{ $divClass }}">
+	<picture class="not-prose">
+		<!-- <source type="image/webp" srcset=" -->
+		<!-- {{- with $respSizes -}} -->
+			<!-- {{- range $i, $e := . -}} -->
+				<!-- {{- if ge $src.Width . -}} -->
+					<!-- {{- if $i }}, {{ end -}}{{- ($src.Resize (print . "x webp " $hint " " $filter) ).RelPermalink }} {{ . }}w -->
+				<!-- {{- end -}} -->
+			<!-- {{- end -}} -->
+		<!-- {{- end -}}" sizes="{{ $dataSzes }}" /> -->
+		<!-- <source type="image/jpeg" srcset=" -->
+		<!-- {{- with $respSizes -}} -->
+			<!-- {{- range $i, $e := . -}} -->
+				<!-- {{- if ge $src.Width . -}} -->
+					<!-- {{- if $i }}, {{ end -}}{{- ($src.Resize (print . "x jpg " $filter) ).RelPermalink }} {{ . }}w -->
+				<!-- {{- end -}} -->
+			<!-- {{- end -}} -->
+		<!-- {{- end -}}" sizes="{{ $dataSzes }}" /> -->
+		<img class="{{ $imgClass }}" src="{{ $src.RelPermalink }}" width="{{ $src.Width }}" height="{{ $src.Height }}" alt="{{ $alt }}" title="{{ $caption }}" loading="lazy" />
+	</picture>
+</div>
+{{- with $caption -}}<p class="imghCaption">{{ $caption | $.Page.RenderString }}</p>{{- end }}
