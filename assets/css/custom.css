@@ -13,3 +13,27 @@
 	font-size: 0.75em;
 	text-align: center;
 }
+
+/* lightGallery */
+.photo-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 0px;
+
+    @media(max-width:600px) {
+        margin: 0;
+    }
+
+    img {
+        border-radius: 8px;
+    }
+
+    .photo-item {
+        padding: 2px;
+        width: auto;
+
+        @media(max-width:300px) {
+            width: 100%;
+        }
+    }
+}

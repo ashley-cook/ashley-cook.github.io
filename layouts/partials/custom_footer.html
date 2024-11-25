@@ -1,0 +1,4 @@
+{{- if and (.Param "gallery") (eq .Kind "page") -}}
+  <script src="{{ (resources.Get "lightgallery/lightgallery.min.js").RelPermalink }}"></script>
+  <script>lightGallery(document.getElementById('lightgallery'), {selector: '.photo-item'});</script>
+{{- end -}}

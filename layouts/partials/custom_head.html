@@ -1,3 +1,4 @@
+<!-- include custom stylesheet -->
 {{- $styles := resources.Get "css/custom.css" -}}
 {{- if hugo.IsDevelopment }}
   {{- $styles = $styles | fingerprint -}}
@@ -5,3 +6,8 @@
   {{- $styles = $styles | minify | fingerprint -}}
 {{ end -}}
 <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
+
+<!-- lightGallery -->
+{{- if and (.Param "gallery") (eq .Kind "page") -}}
+	<link rel="stylesheet" href="{{ print (resources.Get "lightgallery/css/lightgallery.css").RelPermalink }}" />
+{{- end -}}

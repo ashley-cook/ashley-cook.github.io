@@ -1,0 +1,40 @@
+<div class="photo-container" id="lightgallery">
+{{- $context := . -}}
+{{- $imageMetaToml := $context.Page.Resources.GetMatch "image_meta.toml" -}}
+{{- $imageMeta := ($imageMetaToml.Content | unmarshal) -}}
+
+{{- range $src := .Page.Resources.Match "images/**" -}}
+  {{- $title := (replace .Title "images/" "") -}}
+  {{- $keyName := printf "%s_%s" (path.BaseName $title) (strings.Replace (path.Ext $title) "." "") -}}
+  
+  {{- $singleImageMeta := index $imageMeta $keyName -}}
+  {{- if $singleImageMeta.title -}}
+  {{- $title = $singleImageMeta.title -}}
+  {{- end -}}
+
+  <div class="photo-item" data-src="{{ .Permalink }}" data-sub-html="<h4>{{ $title }}</h4><p>{{ $singleImageMeta.caption }}</p>">
+    {{- $crop := default "smart" -}}
+    {{- $tinyw := printf "300x300 %s Lanczos q85" $crop -}}
+    {{- $smallw := printf "600x600 %s Lanczos q80" $crop -}}
+    {{- $mediumw := printf "900x900 %s Lanczos q40" $crop -}}
+    {{- $largew := printf "1200x1200 %s Lanczos q30" $crop -}}
+
+    {{- $srcset := slice -}}
+
+    {{- $tiny := ($src.Fill $tinyw) -}}
+    {{- $srcset = $srcset | append (printf "%s 500w" $tiny.Permalink) -}}
+    {{- $img := dict "src" $tiny.RelPermalink "w" $tiny.Width "h" $src.Height -}}
+
+    {{- $sizes := "(min-width: 900px) 420px, (min-width: 684px) 310px, calc(100vw - 40px)" -}}
+	
+    <a href="{{ .Permalink }}">
+    <picture class="not-prose">
+	<source type="{{ $src.MediaType }}" sizes="{{ $sizes }}" srcset='{{ delimit $srcset ", " }}'>
+    <img loading="lazy" class="center rounded-lg"
+      src="{{ $img.src }}" width="{{ $img.w }}" height="{{ $img.h }}" alt="{{ $title }}">
+    </picture>
+    </a>
+  </div>
+{{ end }}
+
+</div>
